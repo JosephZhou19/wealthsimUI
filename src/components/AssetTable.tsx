@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react"
-import { getAssets } from "../api/assetApi"
 import type { Asset } from "../types/asset"
+import { deleteAsset } from "../api/assetApi";
 
-export default function AssetPage() {
-  const [assets, setAssets] = useState<Asset[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    getAssets()
-      .then(setAssets)
-      .catch(err => setError(err.message))
-      .finally(() => setLoading(false))
-  }, [])
-
-  if (loading) return <p>Loading assets...</p>
-  if (error) return <p>Error: {error}</p>
+type Props = {
+    assets: Asset[];
+    onEdit: (asset: Asset) => void;
+    fetchAssets: () => void;
+}
+export default function AssetTable({assets, onEdit, fetchAssets}: Props) {
+  function handleDelete(assetName: String) {
+    console.log("Delete asset:", assetName);
+    deleteAsset(assetName);
+    fetchAssets();
+  }
   return (
     <div className="p-6">
       <table className="table table-zebra w-full">
@@ -29,13 +25,19 @@ export default function AssetPage() {
           </tr>
         </thead>
         <tbody>
-          {assets.map(asset => (
+          {assets.map((asset: Asset) => (
             <tr key={asset.name}>
               <td>{asset.name}</td>
               <td>{(asset.expected_return * 100).toFixed(2)}%</td>
               <td>{(asset.volatility * 100).toFixed(2)}%</td>
               <td>{(asset.tax_drag * 100).toFixed(2)}%</td>
               <td>{(asset.return_volatility * 100).toFixed(2)}%</td>
+              <td className="text-right">
+              <button className="btn btn-sm btn-outline" onClick={() => onEdit(asset)}>Edit</button>
+              </td>
+              <td className="text-right">
+              <button className="btn btn-sm btn-outline" onClick={() => handleDelete(asset.name)}>Delete</button>
+              </td>
             </tr>
           ))}  
         </tbody>
