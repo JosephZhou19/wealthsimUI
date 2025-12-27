@@ -12,7 +12,8 @@ export default function AssetTable({assets, editAsset, deleteAsset}: Props) {
       <table className="table table-zebra w-full">
         <thead>
           <tr>
-            <th className="capitalize">Name</th>
+            <th>Name</th>
+            <th>Initial Value</th>
             <th>Expected Return Per Year</th>
             <th>Annual Volatility</th>
             <th>Expected Tax Drag</th>

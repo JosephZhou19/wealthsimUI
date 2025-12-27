@@ -18,3 +18,9 @@ export function runBasicSimulation(years: number) {
         method: "GET",
     })
 }
+export function runAdvancedSimulation(years: number) {
+  const url = `/simulate/advanced/${years}`
+  return apiFetch<JSON>(url, {
+    method: "GET"
+  })
+}

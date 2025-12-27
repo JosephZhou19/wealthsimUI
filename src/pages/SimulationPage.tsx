@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { getSimulationRuns, runBasicSimulation } from "../api/simulationApi"
+import {runAdvancedSimulation } from "../api/simulationApi"
 
-export default function Dashboard() {
+export default function SimulationPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
 
   async function handleRun() {
     setLoading(true);
     try {
-      const res = await runBasicSimulation(10);
+      const res = await runAdvancedSimulation(10);
       setResult(res);
     } finally {
       setLoading(false);

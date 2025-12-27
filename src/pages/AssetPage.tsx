@@ -56,7 +56,7 @@ export default function AssetPage() {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <AssetTable onEdit={(asset) =>{openEdit(asset)}} deleteAsset={(assetName) =>handleDelete(assetName)} assets={assets} />
+        <AssetTable editAsset={(asset) =>{openEdit(asset)}} deleteAsset={(assetName) =>handleDelete(assetName)} assets={assets} />
       )}
       {isOpen && <AssetModal targetAsset={assetToUpdate} onClose={()=> setIsOpen(false)} saveChanges={(asset) => saveModalChanges(asset)}/>}
     </div>
