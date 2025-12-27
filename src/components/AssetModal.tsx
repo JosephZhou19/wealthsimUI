@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type {Asset} from "../types/asset"
-import { createAsset } from "../api/assetApi";
 type Props = {
+  targetAsset : Asset | null;
   onClose: () => void;
+  saveChanges: (asset: Asset) => void;
 };
 
-export function AssetModal({ onClose }: Props) {
+export function AssetModal({targetAsset, onClose, saveChanges }: Props) {
   const [name, setName] = useState("");
   const [value, setValue] = useState("");
   const [expectedReturn, setExpectedReturn] = useState("");
@@ -13,6 +14,25 @@ export function AssetModal({ onClose }: Props) {
   const [volatility, setVolatility] = useState("");
   const [returnVolatility, setReturnVolatility] = useState("");
 
+  useEffect(() => {
+    if (targetAsset) {
+        setName(targetAsset.name)
+        setValue(String(targetAsset.initial_value))
+        setExpectedReturn(String(targetAsset.expected_return))
+        setTaxDrag(String(targetAsset.tax_drag))
+        setVolatility(String(targetAsset.volatility))
+        setReturnVolatility(String(targetAsset.return_volatility))
+    } 
+    else {
+        setName("")
+        setValue("")
+        setExpectedReturn("")
+        setTaxDrag("")
+        setVolatility("")
+        setReturnVolatility("")
+    }
+  }, [targetAsset])
+  
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
@@ -24,9 +44,7 @@ export function AssetModal({ onClose }: Props) {
         volatility: parseFloat(volatility),
         return_volatility: parseFloat(returnVolatility)
     }
-    console.log("Create asset:", payload);
-    createAsset(payload)
-    // TODO: call backend POST /assets
+    saveChanges(payload)
     onClose();
   }
 
@@ -39,6 +57,7 @@ export function AssetModal({ onClose }: Props) {
           <input
             className="input input-bordered w-full"
             placeholder="Asset Name"
+            disabled={!!targetAsset}
             value={name}
             onChange={e => setName(e.target.value)}
             required
