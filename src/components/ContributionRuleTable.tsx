@@ -34,6 +34,7 @@ export function ContributionRuleTable({assetName
         await createRule(data)
         await fetchAssetRules()
         setSaving(false)
+        setNewRule(null)
     }
 
     async function handleDelete(ruleName: string) {

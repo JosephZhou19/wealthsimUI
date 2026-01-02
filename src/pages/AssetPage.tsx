@@ -3,6 +3,7 @@ import { AssetModal } from "../components/AssetModal"
 import {getAssets, createAsset, deleteAsset, updateAsset} from "../api/assetApi"
 import { useState, useEffect } from "react"
 import type { Asset } from "../types/asset"
+import { Link } from "react-router-dom"
 
 
 
@@ -47,6 +48,9 @@ export default function AssetPage() {
 
   return (
     <div>
+      <Link to="/simulation" className="btn">
+      Go to Simulations
+      </Link>
       <h2>Assets</h2>
       <div className="flex justify-between items-center mb-4">
         <button className="btn" onClick={() => setIsOpen(true)}>
@@ -58,7 +62,10 @@ export default function AssetPage() {
       ) : (
         <AssetTable editAsset={(asset) =>{openEdit(asset)}} deleteAsset={(assetName) =>handleDelete(assetName)} assets={assets} />
       )}
-      {isOpen && <AssetModal targetAsset={assetToUpdate} onClose={()=> setIsOpen(false)} saveChanges={(asset) => saveModalChanges(asset)}/>}
+      {isOpen && <AssetModal targetAsset={assetToUpdate} onClose={()=> {
+        setIsOpen(false);
+        setAssetToUpdate(null)
+        }} saveChanges={(asset) => saveModalChanges(asset)}/>}
     </div>
   )
 }

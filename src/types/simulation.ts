@@ -14,7 +14,26 @@ export interface SimulationSummary {
   p90: number;
   mean: number;
 }
-
+export interface SimulationYear {
+  year: number;
+  p5: number;
+  p25: number;
+  p50: number;
+  p75: number;
+  p95: number;
+}
 export interface SimulationResponse {
-  seed: string;
+  years: number;
+  paths: {
+    final_result: {
+      p5: number;
+      p25: number;
+      p50: number;
+      p75: number;
+      p95: number;
+      probability_of_loss: number;
+      seed: string
+    }
+    yearly_timeline: SimulationYear[]
+  }
 }
