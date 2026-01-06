@@ -3,7 +3,8 @@ import { AssetModal } from "../components/AssetModal"
 import {getAssets, createAsset, deleteAsset, updateAsset} from "../api/assetApi"
 import { useState, useEffect } from "react"
 import type { Asset } from "../types/asset"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
+import SideBar from "../components/SideBar"
 
 
 
@@ -47,25 +48,25 @@ export default function AssetPage() {
   }, [])
 
   return (
-    <div>
-      <Link to="/simulation" className="btn">
-      Go to Simulations
-      </Link>
-      <h2>Assets</h2>
-      <div className="flex justify-between items-center mb-4">
-        <button className="btn" onClick={() => setIsOpen(true)}>
-            Add Asset
-        </button>
-      </div>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <AssetTable editAsset={(asset) =>{openEdit(asset)}} deleteAsset={(assetName) =>handleDelete(assetName)} assets={assets} />
-      )}
-      {isOpen && <AssetModal targetAsset={assetToUpdate} onClose={()=> {
-        setIsOpen(false);
-        setAssetToUpdate(null)
-        }} saveChanges={(asset) => saveModalChanges(asset)}/>}
+    <div className="min-h-screen bg-base-200 flex">
+      <SideBar/>
+      <main className="flex-1 p-6">
+        <h2>Assets</h2>
+        <div className="flex justify-between items-center mb-4">
+          <button className="btn" onClick={() => setIsOpen(true)}>
+              Add Asset
+          </button>
+        </div>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <AssetTable editAsset={(asset) =>{openEdit(asset)}} deleteAsset={(assetName) =>handleDelete(assetName)} assets={assets} />
+        )}
+        {isOpen && <AssetModal targetAsset={assetToUpdate} onClose={()=> {
+          setIsOpen(false);
+          setAssetToUpdate(null)
+          }} saveChanges={(asset) => saveModalChanges(asset)}/>}
+      </main>
     </div>
   )
 }

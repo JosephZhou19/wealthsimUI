@@ -18,8 +18,13 @@ export function runBasicSimulation(years: number) {
         method: "GET",
     })
 }
-export function runAdvancedSimulation(years: number) {
-  const url = `/simulate/advanced/${years}`
+export function runAdvancedSimulation(years: number, useAI: boolean) {
+  var url;
+  if (useAI) {
+    url = `/simulate/advanced/${years}?AI_analysis=true` 
+  } else {
+    url = `/simulate/advanced/${years}` 
+  }
   return apiFetch<SimulationResponse>(url, {
     method: "GET"
   })

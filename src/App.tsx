@@ -6,14 +6,15 @@ import SimulationPage from "./pages/SimulationPage"
 function App() {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AssetPage/>} />
-        <Route path="/asset" element={ <AssetPage/>}/>
-        <Route path="/simulation" element={<SimulationPage/>}/>
-      </Routes>
-    </BrowserRouter>
-   
+    <div className="min-h-screen bg-base-200">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AssetPage/>} />
+          <Route path="/asset" element={ <AssetPage/>}/>
+          <Route path="/simulation" element={<SimulationPage/>}/>
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 
