@@ -9,7 +9,7 @@ type Props = {
 export default function AssetTable({assets, editAsset, deleteAsset}: Props) {
   return (
     <div className="p-6">
-      <table className="table table-zebra w-full">
+      <table className="table table-zebra">
         <thead>
           <tr>
             <th>Name</th>
