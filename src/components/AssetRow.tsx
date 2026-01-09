@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import type { Asset } from "../types/asset"
-import type {ContributionRule} from "../types/ContributionRule"
 import { ContributionRuleTable } from "./ContributionRuleTable";
 
 type Props = {

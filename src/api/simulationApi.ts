@@ -1,5 +1,6 @@
 import { apiFetch } from "./client";
 import type { SimulationRequest, SimulationResponse } from "../types/simulation";
+import type { ChatRequest } from "../types/Chat";
 
 export function runSimulation(req: SimulationRequest) {
   return apiFetch<SimulationResponse>("/simulate/basic/1", {
@@ -27,5 +28,12 @@ export function runAdvancedSimulation(years: number, useAI: boolean) {
   }
   return apiFetch<SimulationResponse>(url, {
     method: "GET"
+  })
+}
+
+export function sendChatRequest(req: ChatRequest) {
+  return apiFetch<string>("/simulate/aiChat", {
+    method:"POST",
+    body: JSON.stringify(req)
   })
 }

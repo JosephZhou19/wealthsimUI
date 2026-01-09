@@ -24,6 +24,8 @@ export interface SimulationYear {
 }
 export interface SimulationResponse {
   years: number;
+  run_id: string;
+  seed: string;
   final_result: {
     p5: number;
     p25: number;
@@ -32,8 +34,6 @@ export interface SimulationResponse {
     p95: number;
     probability_of_loss: number;
     max_drawdown: number;
-    seed: string
   }
   yearly_timeline: SimulationYear[],
-  AI_response: string
 }

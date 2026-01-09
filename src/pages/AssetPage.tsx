@@ -3,7 +3,6 @@ import { AssetModal } from "../components/AssetModal"
 import {getAssets, createAsset, deleteAsset, updateAsset} from "../api/assetApi"
 import { useState, useEffect } from "react"
 import type { Asset } from "../types/asset"
-import { Link, NavLink } from "react-router-dom"
 import SideBar from "../components/SideBar"
 
 

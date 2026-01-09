@@ -8,6 +8,9 @@ export default function SideBar() {
             <NavLink to="/asset" className="btn btn-ghost justify-start w-full">
                 Assets
             </NavLink>
+            <NavLink to="/profile" className="btn btn-ghost justify-start w-full">
+                User Profile
+            </NavLink>
             <NavLink to="/simulation" className="btn btn-ghost justify-start w-full">
                 Simulation
             </NavLink>
@@ -16,8 +19,10 @@ export default function SideBar() {
                 <h2 className="text-md font-bold">Instructions</h2>
                 <p>
                     Create asset buckets and monthly contributions from the Assets page.
+                    For AI decision making, update your user profile in the User Profile page with your goals and behavior.
                     From the Simulation page, pressing 'Run Simulation' will induce a set of monte-carlo simulations.
                     These will randomly predict possible outcomes for your assets based on your set volatility values.
+                    At the bottom of the simulation page, you can chat with an AI advisor about your results.
                 </p>
             </div>
             <div className="mt-auto pt-4 border-t border-base-300 text-xs opacity-60">

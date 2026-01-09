@@ -1,9 +1,9 @@
 import { useState } from "react";
 import {runAdvancedSimulation } from "../api/simulationApi"
 import { SimulationChart } from "../components/SimulationChart";
-import ReactMarkdown from "react-markdown"
 import type { SimulationResponse } from "../types/simulation";
 import SideBar from "../components/SideBar";
+import AiChat from "../components/AiChat";
 
 export default function SimulationPage() {
   const [loading, setLoading] = useState(false);
@@ -42,10 +42,6 @@ export default function SimulationPage() {
                   </p>
                 </h2>
                 <div className="card-body flex flex-col md:flex-row items-center justify-between gap-4">
-                    <label className="label">
-                      Use AI Analysis on Simulation
-                      <input  type="checkbox" checked={useAI} onChange={() => setUseAi(!useAI) } className="checkbox checkbox-sm"/>
-                    </label>
                     <label className="label">
                       Control the number of years in the simulation
                       <input type="number" defaultValue={years} onChange={(e) => setYears(Number(e.target.value))} className="input validator" />
@@ -138,15 +134,16 @@ export default function SimulationPage() {
                   {useAI && (
                     <div className="card bg-base-100 shadow">
                       <h2 className="card-title">
-                        What this means
+                        Get some advice
                         <p className="text-sm opacity-70">
-                          An AI interpretation of the data.
+                          Talk with an AI about the results
                         </p>
                       </h2>
                       <div className="card-body bg-base-200">
-                        <ReactMarkdown>
-                          {result.AI_response}
-                        </ReactMarkdown>
+                        <AiChat simulationId={result.run_id} />
+                        <div className="text-sm opacity-70">
+                          Example: "Do you think the simulation results match my user profile?"
+                        </div>
                       </div>
                     </div>
                   )}
@@ -155,7 +152,6 @@ export default function SimulationPage() {
             </div>
         </main>
       </div>
-     
-      </>
+    </>
   );
 }
