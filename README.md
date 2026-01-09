@@ -1,6 +1,7 @@
 # WealthSim UI
 This is the Front end for Wealth Simulator written in React. This handles adding, editing, and removing data for 
 monte carlo simulations. It displays results and has a chat bot for analyzing results with Artificial Intelligence.
+The backend of this project belongs in [WealthSim](https://github.com/JosephZhou19/wealthsim).
 ## Examples of page view
 Asset Page:
 <img width="1911" height="905" alt="AssetPage" src="https://github.com/user-attachments/assets/8d0ec169-d88a-4283-b353-a79566c84018" />
