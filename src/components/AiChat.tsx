@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { apiFetch } from "../api/client"
 import type { ChatMessage, ChatRequest } from "../types/Chat";
 import { sendChatRequest } from "../api/simulationApi";
 import ReactMarkdown from "react-markdown";

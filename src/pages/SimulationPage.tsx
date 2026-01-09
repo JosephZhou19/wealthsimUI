@@ -8,13 +8,12 @@ import AiChat from "../components/AiChat";
 export default function SimulationPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<SimulationResponse|null>(null);
-  const [useAI, setUseAi] = useState(false)
   const [years, setYears] = useState(10)
 
   async function handleRun() {
     setLoading(true);
     try {
-      const res = await runAdvancedSimulation(years, useAI);
+      const res = await runAdvancedSimulation(years);
       console.log(res.yearly_timeline)
       setResult(res);
     } finally {
@@ -131,22 +130,20 @@ export default function SimulationPage() {
                       <SimulationChart data={result.yearly_timeline} />
                     </div>
                   </div>
-                  {useAI && (
-                    <div className="card bg-base-100 shadow">
-                      <h2 className="card-title">
-                        Get some advice
-                        <p className="text-sm opacity-70">
-                          Talk with an AI about the results
-                        </p>
-                      </h2>
-                      <div className="card-body bg-base-200">
-                        <AiChat simulationId={result.run_id} />
-                        <div className="text-sm opacity-70">
-                          Example: "Do you think the simulation results match my user profile?"
-                        </div>
+                  <div className="card bg-base-100 shadow">
+                    <h2 className="card-title">
+                      Get some advice
+                      <p className="text-sm opacity-70">
+                        Talk with an AI about the results
+                      </p>
+                    </h2>
+                    <div className="card-body bg-base-200">
+                      <AiChat simulationId={result.run_id} />
+                      <div className="text-sm opacity-70">
+                        Example: "Do you think the simulation results match my user profile?"
                       </div>
                     </div>
-                  )}
+                  </div>
                 </>
               )} 
             </div>
