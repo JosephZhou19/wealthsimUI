@@ -13,7 +13,70 @@ export default function SimulationPage() {
   async function handleRun() {
     setLoading(true);
     try {
-      const res = await runAdvancedSimulation(years);
+      const res : SimulationResponse = {
+        years: 5,
+        run_id: "1",
+        seed: "2",
+        final_result: {
+          p5: 5000,
+          p25: 6000,
+          p50: 8000,
+          p75: 12000,
+          p95: 20000,
+          probability_of_loss: 0.25,
+          max_drawdown: 0.4
+        },
+        yearly_timeline: [
+           {
+            year: 0,
+            p5: 2000,
+            p25: 2000,
+            p50: 2000,
+            p75: 2000,
+            p95: 2000
+          },
+          {
+            year: 2,
+            p5: 2000,
+            p25: 3000,
+            p50: 4000,
+            p75: 5000,
+            p95: 6500
+          },
+          {
+            year: 4,
+            p5: 2500,
+            p25: 3700,
+            p50: 4900,
+            p75: 6000,
+            p95: 8000
+          },
+          {
+            year: 6,
+            p5: 3000,
+            p25: 5000,
+            p50: 7000,
+            p75: 10000,
+            p95: 12000
+          },
+          {
+            year: 8,
+            p5: 3000,
+            p25: 5000,
+            p50: 7000,
+            p75: 10000,
+            p95: 12000
+          },
+          {
+            year: 10,
+            p5: 5000,
+            p25: 6000,
+            p50: 8000,
+            p75: 12000,
+            p95: 20000
+          },
+        ]
+      }
       console.log(res.yearly_timeline)
       setResult(res);
     } finally {

@@ -15,12 +15,11 @@ export default function UserProfilePage() {
         e.preventDefault();
         if (profile != null) {
             const payload: Profile = profile
-            createProfile(payload);
         }
     }
     async function fetchProfile() {
         setLoading(true)
-        const data = await getProfile()
+        const data = null
         console.log("fetched profile " + data)
         if (data !== null) {
             setProfile(data)

@@ -17,7 +17,13 @@ export function ContributionRuleTable({assetName
     const [newRule, setNewRule] = useState<NewRuleDraft | null>(null)
     const [saving, setSaving] = useState(false)
     async function fetchAssetRules() {
-        const data = await getAssetRules(assetName)
+        const data : ContributionRule[] = [
+            {
+                name: "Monthly Contribution",
+                rate: 500,
+                asset_name: assetName
+            }
+        ]
         console.log("fetched new asset rules" + data)
         setRules(data)
       }
@@ -31,16 +37,15 @@ export function ContributionRuleTable({assetName
             
         }
         console.log("creating new asset rule" + data)
-        await createRule(data)
-        await fetchAssetRules()
+        setRules([...rules, data])
         setSaving(false)
         setNewRule(null)
     }
 
     async function handleDelete(ruleName: string) {
         console.log("deleting asset rule" + ruleName)
-        await deleteRule(ruleName)
-        await fetchAssetRules()
+        const updatedRules = rules.filter(rule =>  rule.name != ruleName)
+        setRules(updatedRules)
     }
     useEffect(() => {
     fetchAssetRules()

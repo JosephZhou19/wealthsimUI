@@ -25,7 +25,7 @@ export default function AiChat({ simulationId}: { simulationId: string;}) {
         run_id: simulationId
     }
     console.log("Run id for run: " + simulationId)
-    const response = await sendChatRequest(req)
+    const response = "This is a simulated AI response. This AI looks at your asset data, profile data, and your simulation results to answer whatever questions you have. It stores conversation context as well so you can chat back and forth."
     const newReply: ChatMessage = {
         role: "assistant", 
         content: response

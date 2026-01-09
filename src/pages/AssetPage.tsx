@@ -1,6 +1,5 @@
 import AssetTable from "../components/AssetTable"
 import { AssetModal } from "../components/AssetModal"
-import {getAssets, createAsset, deleteAsset, updateAsset} from "../api/assetApi"
 import { useState, useEffect } from "react"
 import type { Asset } from "../types/asset"
 import SideBar from "../components/SideBar"
@@ -14,29 +13,55 @@ export default function AssetPage() {
   const [assetToUpdate, setAssetToUpdate] = useState<Asset | null>(null)
 
   async function fetchAssets() {
-    setLoading(true)
-    const data = await getAssets()
-    console.log("fetched new assets" + data)
-    setAssets(data)
-    setLoading(false)
+    const getAssets: Asset[] = [
+      {
+        name: "High Yield Savings Account",
+        initial_value: 1000,
+        expected_return: 0.03,
+        tax_drag: 0.02,
+        volatility: 0,
+        return_volatility: 0.02
+      },
+      {
+        name: "Roth IRA",
+        initial_value: 5000,
+        expected_return: 0.07,
+        tax_drag: 0,
+        volatility: 0.1,
+        return_volatility: 0
+      },
+      {
+        name: "Brokerage Account",
+        initial_value: 6000,
+        expected_return: 0.08,
+        tax_drag: 0.2,
+        volatility: 0.12,
+        return_volatility: 0
+      },
+    ]
+    setAssets(getAssets)
   }
-  async function saveModalChanges(asset: Asset) {
+  async function saveModalChanges(newAsset: Asset) {
     if (assetToUpdate){
-       console.log("Update asset:", asset);
-       await updateAsset(asset);
-       await fetchAssets();
+      console.log("Update asset:", newAsset);
+      const updatedAssets = assets.map((asset) => {
+        if (asset.name === newAsset.name) {
+          return newAsset
+        }
+        return asset
+      }) 
+      setAssets(updatedAssets)
     }
     else {
-        console.log("Create asset:", asset);
-        await createAsset(asset);
+        console.log("Create asset:", newAsset);
+        setAssets([...assets, newAsset])
         setIsOpen(false)
-        await fetchAssets();
     }
   }
   async function handleDelete(assetName: String) {
       console.log("Delete asset:", assetName);
-      await deleteAsset(assetName);
-      await fetchAssets();
+      const updatedAssets = assets.filter(asset => asset.name != assetName);
+      setAssets(updatedAssets)
     }
   async function openEdit(asset: Asset) {
     setAssetToUpdate(asset)
